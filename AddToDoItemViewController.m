@@ -10,9 +10,24 @@
 
 @interface AddToDoItemViewController ()
 
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *doneButton;
+
+@property (weak, nonatomic) IBOutlet UITextField *textField;
+
 @end
 
 @implementation AddToDoItemViewController
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if (sender != self.doneButton) return;
+    if (self.textField.text.length > 0)
+    {
+        self.toDoItem = [[ToDoItem alloc] init];
+        self.toDoItem.itemName = self.textField.text;
+        self.toDoItem.completed = NO;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
